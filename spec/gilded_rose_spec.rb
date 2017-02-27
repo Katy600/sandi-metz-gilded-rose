@@ -3,11 +3,28 @@ require 'gilded_rose'
 describe GildedRose do
 
   describe "#update_quality" do
+
     it "does not change the name" do
       items = [Item.new("foo", 0, 0)]
       GildedRose.new(items).update_quality()
       expect(items[0].name).to eq "foo"
     end
+
+    it "quality of a normal item goes down by 1" do
+      items = [Item.new("normal", 15, 11)]
+      expect {GildedRose.new(items).update_quality()}.to change {items[0].quality}.by(-1)
+    end
+
+    it "quality of a normal item goes down by 2 when it is past it's sell by date" do
+      items = [Item.new("normal", 0, 11)]
+      expect {GildedRose.new(items).update_quality()}.to change {items[0].quality}.by(-2)
+    end
+
+    it "quality is zero don't do anything" do
+      items = [Item.new("foo", 5, 0)]
+      expect {GildedRose.new(items).update_quality()}.not_to change {items[0].quality}
+    end
+
 
     it "decreases the quality value by 1" do
       items = [Item.new("foo", 5, 10)]
