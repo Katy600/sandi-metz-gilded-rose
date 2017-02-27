@@ -10,7 +10,9 @@ class GildedRose
       when item.name == "normal"
           normal_update_quality()
       when item.name == "Aged Brie"
-          brie_up_date_quality
+          brie_update_quality
+      when item.name == "Sulfuras, Hand of Ragnaros"
+        sulfuras_update_quality
       end
     end
   end
@@ -18,19 +20,23 @@ class GildedRose
 
   def normal_update_quality()
       @items.each do |item|
-          item.sell_in -= 1
-          return if item.quality == 0
-          item.quality -= 1
-          item.quality -= 1 if item.sell_in <= 0
-        end
+        item.sell_in -= 1
+        return if item.quality == 0
+        item.quality -= 1
+        item.quality -= 1 if item.sell_in <= 0
+      end
     end
 
-    def brie_up_date_quality
+    def brie_update_quality
       @items.each do |item|
-          item.sell_in -= 1
-          return if item.quality >= 50
-          item.quality += 1
-          item.quality += 1 if item.sell_in <= 0
+        item.sell_in -= 1
+        return if item.quality >= 50
+        item.quality += 1
+        item.quality += 1 if item.sell_in <= 0
+    end
+
+    def sulfuras_update_quality
+
     end
   end
 
