@@ -14,6 +14,11 @@ class GildedRose
     items.update_quality
   end
 
+  def sulfuras_update_quality
+    items = Sulfuras.new(@items)
+    items.update_quality
+  end
+
   def update_quality()
     @items.each do |item|
       case
@@ -28,10 +33,6 @@ class GildedRose
       end
     end
   end
-
-    def sulfuras_update_quality
-
-    end
 
     def backstage_update_quality
       @items.each do |item|
@@ -62,6 +63,17 @@ class Brie
   end
 end
 
+class Sulfuras
+  attr_reader :items
+
+  def initialize(items)
+    @items = items
+  end
+
+  def update_quality
+  end
+end
+
 class Normal
   attr_reader :items
 
@@ -78,7 +90,6 @@ class Normal
     end
   end
 end
-
 
 class Item
   attr_accessor :name, :sell_in, :quality
