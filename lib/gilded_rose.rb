@@ -5,8 +5,13 @@ class GildedRose
   end
 
   def normal_update_quality
-    normal_items = Normal.new(@items)
-    normal_items.update_quality
+    items = Normal.new(@items)
+    items.update_quality
+  end
+
+  def brie_update_quality
+    items = Brie.new(@items)
+    items.update_quality
   end
 
   def update_quality()
@@ -24,15 +29,6 @@ class GildedRose
     end
   end
 
-    def brie_update_quality
-      @items.each do |item|
-        item.sell_in -= 1
-        return if item.quality >= 50
-        item.quality += 1
-        item.quality += 1 if item.sell_in <= 0
-      end
-    end
-
     def sulfuras_update_quality
 
     end
@@ -47,6 +43,23 @@ class GildedRose
         item.quality += 1 if item.sell_in < 5
       end
     end
+end
+
+class Brie
+  attr_reader :items
+
+  def initialize(items)
+    @items = items
+  end
+
+  def update_quality
+    @items.each do |item|
+      item.sell_in -= 1
+      return if item.quality >= 50
+      item.quality += 1
+      item.quality += 1 if item.sell_in <= 0
+    end
+  end
 end
 
 class Normal
