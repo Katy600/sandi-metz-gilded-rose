@@ -4,37 +4,21 @@ class GildedRose
     @items = items
   end
 
-  def normal_update_quality
-    items = Normal.new(@items)
-    items.update_quality
-  end
-
-  def brie_update_quality
-    items = Brie.new(@items)
-    items.update_quality
-  end
-
-  def sulfuras_update_quality
-    items = Sulfuras.new(@items)
-    items.update_quality
-  end
-
-  def backstage_update_quality
-    items = Backstage.new(@items)
-    items.update_quality
-  end
-
   def update_quality()
     @items.each do |item|
       case
       when item.name == "normal"
-          normal_update_quality()
+        items = Normal.new(@items)
+        items.update_quality
       when item.name == "Aged Brie"
-          brie_update_quality
+        items = Brie.new(@items)
+        items.update_quality
       when item.name == "Sulfuras, Hand of Ragnaros"
-        sulfuras_update_quality
+        items = Sulfuras.new(@items)
+        items.update_quality
       when item.name == "Backstage passes to a TAFKAL80ETC concert"
-        backstage_update_quality
+        items = Backstage.new(@items)
+        items.update_quality
       end
     end
   end
